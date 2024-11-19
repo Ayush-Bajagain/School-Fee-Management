@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.header {
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logo {
+    width: 75px;
+    height: 75px;
+    overflow: hidden;
+    margin-left: 50px;
+    border: 1px solid #ffffff33;
+    border-radius: 50%;
+}
+
+.logo img {
+    width: 100%;
+    height: auto;
+}
+
+.title h1 {
+    font-size: 24px;
+    margin-left: 20px;
+}
+
+.date-time {
+    text-align: right;
+}
+
+.wrapper {
+    display: flex;
+    flex: 1;
+}
+
+.sidebar {
+    background-color: #2b2b2b;
+    position: relative;
+    color: white;
+    padding: 20px;
+    width: 200px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .welcome {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: yellow;
+}
+
+.menu ul {
+    list-style: none;
+}
+
+.menu ul li {
+    margin-bottom: 20px;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.menu ul li a {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    font-size: 18px;
+}
+.active{
+    color: royalblue !important;
+}
+
+.menu ul li a:hover{
+    color: royalblue;
+}
+
+
+#logout-bnt {
+   
+    width: 90%
+
+}
+
+#logout-btn a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    background-color: #ff4d4d;
+    
+    padding: 8px 30px;
+    border-radius: 5px;
+}
+#logout-btn a:hover {
+    background-color: #e60000;
+}
+
+
+
+
+
+.main-content {
+    padding: 20px;
+    background-color: #fff;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.first-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+}
+
+.enrolled-box, .fee-collection-box, .due-box {
+    width: calc(33.33% - 20px);
+    height: 300px;
+    box-shadow: 1px 1px 10px -3px #00000066;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.enrolled-box .photo, .fee-collection-box .photo, .due-box .photo {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #00000034;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.enrolled-box .photo img, .fee-collection-box .photo img, .due-box .photo img {
+    width: 100%;
+    height: auto;
+}
+
+.enrolled-box h2, .fee-collection-box h2, .due-box h2 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.enrolled-box .count-std, .fee-collection-box .count-fee, .due-box .count-due {
+    font-size: 36px;
+    font-weight: 600;
+    color: #33f;
+}
+
+@media (max-width: 1200px) {
+    .enrolled-box, .fee-collection-box, .due-box {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .enrolled-box, .fee-collection-box, .due-box {
+        width: 100%;
+        height: auto;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+    }
+
+    .wrapper {
+        flex-direction: column;
+    }
+}

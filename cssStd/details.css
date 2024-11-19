@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+.main-content .nav {
+    width: 100%;
+    min-height: 100px;
+    border-bottom: 2px solid #00000034;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-content .nav h2 {
+    text-align: center;
+}
+
+.history-list {
+    width: 100%;
+    min-height: 100px;
+    box-shadow: 5px 5px 10px 1px #00000033;
+    border-radius: 10px;
+    margin: 18px 0;
+    background-color: #ccc;
+    padding: 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    
+}
+
+.history-list .details{
+    
+    margin-left: 50px;
+    display: flex;
+    gap: 50px;
+    
+}
+
+.history-list .details p{
+    font-size: 14px;
+    font-family: "poppins" ;
+}
+
+
+
+
+.history-list .payment-handle button {
+    width: 120px;
+    height: 35px;
+    border: none;
+    border-radius: 18px;
+    font-size: 13px;
+    background-color: royalblue;
+    color: #fff;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+}
+
+.history-list .payment-handle button:hover {
+    background-color: rgb(54, 90, 196);
+}
+
+
+
+
+
+
+
+
+.student-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.student-table th, .student-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.student-table th {
+    background-color: rgba(65, 105, 225, 0.857);
+    color: white;
+}
+
+
+.student-table tr:hover {
+    outline: 1.1px solid #ccc;}
+
+.edit-btn, .view-btn {
+    background-color: rgba(255, 0, 0, 0.724);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+    height: 30px;
+    width: 100px;
+}
+
+.view-btn {
+    background-color: rgb(27, 221, 27);
+}
+
+.edit-btn:hover {
+    background-color: red;
+}
+
+.view-btn:hover {
+    background-color: green;
+}

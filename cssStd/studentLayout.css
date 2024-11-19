@@ -1,0 +1,164 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logo {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.logo img {
+    width: 100%;
+    height: auto;
+}
+
+.title h1 {
+    font-size: 24px;
+    margin-left: 20px;
+}
+
+.date-time {
+    text-align: right;
+}
+
+.wrapper {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    flex-direction: row;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #2b2b2b;
+    color: white;
+    padding: 20px;
+    width: 250px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar .welcome {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: yellow;
+}
+
+.menu ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.menu ul li {
+    text-align: center;
+}
+
+.menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.menu ul li .active {
+    color: royalblue;
+}
+
+.menu ul li a:hover {
+    color: royalblue;
+}
+
+#logout-btn {
+
+    background-color: red;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 80%;
+    border-radius: 4px;
+}
+#logout-btn a{
+    padding: 16px 35px;
+    color: #fff;
+
+}
+
+#logout-btn:hover {
+    opacity: 100%;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+}
+
+
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: fit-content;
+        position: relative;
+    }
+
+    .main-content {
+        padding: 10px;
+    }
+
+
+}
+
+
+@media screen and (max-width: 480px) {
+    .header .title h1 {
+        font-size: 18px;
+    }
+
+    .date-time p {
+        font-size: 14px;
+    }
+
+    .menu ul li a {
+        font-size: 16px;
+    }
+
+}

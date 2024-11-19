@@ -1,0 +1,130 @@
+.main-content .make-payment {
+    width: 100%;
+}
+
+.make-payment #create-payment-btn {
+    font-size: 16px;
+    cursor: pointer;
+    height: 40px;
+    width: 139px;
+    opacity: 80%;
+    border: none;
+    border-radius: 10px;
+    background-color: royalblue;
+    color: #ffffff;
+    position: relative;
+    top: 18px;
+}
+
+.make-payment #create-payment-btn:hover {
+
+    opacity: 100%;
+    /*text-decoration: underline;*/
+}
+
+
+.make-payment #form-main {
+    width: fit-content;
+    height: fit-content;
+    padding: 40px;
+    border: 2px solid #33333343;
+    position: relative;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+    transition: .3s all ease;
+
+    display: none;
+}
+
+.make-payment form input{
+    margin: 15px 25px;
+    width: 300px;
+    height: 35px;
+    padding: 0 15px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    border-bottom: 1px solid #333333aa;
+}
+
+.make-payment form select {
+    margin: 15px;
+    width: 300px;
+    height: 35px;
+    padding: 0 15px;
+
+    outline: none;
+    border: 1px solid #333333aa;
+}
+
+#submit-btn {
+    height: 40px;
+    border: none;
+    background-color: royalblue;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border: 0;
+    border-radius: 10px;
+}
+
+hr {
+    height: 2px;
+    border: none;
+    outline: none;
+    background-color: #33333378;
+    border-radius: 20px;
+}
+
+
+
+.made-payment {
+    width: 100%;
+    padding: 50px 0;
+    margin-top: 20px;
+}
+
+
+
+.made-payment table {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.made-payment th, .made-payment td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.made-payment th {
+    background-color: rgba(65, 105, 225, 0.857);
+    color: white;
+}
+
+
+.made-payment tr:hover {
+    outline: 1.1px solid #ccc;
+}
+
+
+.view-btn {
+    width: 70px;
+    height: 30px;
+    border: 1px solid #333;
+    border: none;
+    border-radius: 10px;
+    background: red;
+}
+
+.view-btn a {
+    text-decoration: none;
+    font-size: 16px;
+    border: none;
+    color: #fff;
+    background-color: red;
+}
+
+
