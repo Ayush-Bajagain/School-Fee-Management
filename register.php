@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./newCss/register.css"/>
+    
     <title>Register</title>
-    <style>
+    <!-- <style>
         /* CSS for styling */
         * {
             margin: 0;
@@ -43,7 +45,7 @@
             text-align: left;
             color: #000;
         }
-        input[type="text"], input[type="password"] {
+        input[type="text"], input[type="password"],select {
             background-color: transparent;
             border: none;
             border-bottom: 2px solid #000;
@@ -53,7 +55,7 @@
             outline: none;
             transition: border-bottom 0.3s ease-in-out;
         }
-        input[type="text"]:focus, input[type="password"]:focus {
+        input[type="text"]:focus, input[type="password"]:focus, select:focus {
             border-bottom: 2px solid royalblue;
         }
         #submit-btn {
@@ -76,7 +78,7 @@
         .login-action a {
             margin-left: 10px;
         }
-    </style>
+    </style> -->
 </head>
 <body>
 <div class="container">
@@ -96,6 +98,14 @@
         <label for="email">Email</label>
         <input type="text" name="email" id="email" required/>
 
+        <label for="program">Program</label>
+        <select name="program" id="program">
+            <option value=""></option>
+            <option value="bca">BCA</option>
+            <option value="bim">BIM</option>
+            <option value="bba">BBA</option>
+        </select>
+
         <label for="username">Username</label>
         <input type="text" name="username" id="username" required/>
 
@@ -109,78 +119,6 @@
     </form>
     <p class="login-action">Already have an account?<a href="index.php">Login</a></p>
 </div>
-
-<?php
-if (isset($_POST['submit'])) {
-    // Collect and sanitize form data
-    $id = $_POST['id'] ?? '';
-    $name = $_POST['fullName'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $batch = $_POST['batch'] ?? '';
-    $username = $_POST['username'] ?? '';
-    $pass = $_POST['password'] ?? '';
-
-
-
-    // Check if any required field is empty
-    if (empty($id) || empty($name) || empty($email) || empty($batch) || empty($username) || empty($pass)) {
-        echo "<script>alert('All fields are required.');</script>";
-        exit;
-    }
-
-    // Include database connection
-    include 'api/connection.php';
-
-    // Check if the entered student details match a record in the students table
-    $checkQuery = "SELECT * FROM students WHERE full_name = ? AND student_id = ? AND email = ? AND batch = ?";
-    $checkStmt = mysqli_prepare($conn, $checkQuery);
-    mysqli_stmt_bind_param($checkStmt, 'ssss', $name, $id, $email, $batch);
-    mysqli_stmt_execute($checkStmt);
-    $result = mysqli_stmt_get_result($checkStmt);
-
-    // If a matching record is found, proceed with registration
-    if (mysqli_num_rows($result) > 0) {
-
-
-
-
-
-        
-
-$query = "INSERT INTO register (id, full_name, email, username, password, batch) VALUES (?, ?, ?, ?, ?, ?)";
-$stmt = mysqli_prepare($conn, $query);
-
-if ($stmt) {
-    // Bind parameters and execute the query
-    mysqli_stmt_bind_param($stmt, 'ssssss', $id, $name, $email, $username, $pass, $batch);
-
-    if (mysqli_stmt_execute($stmt)) {
-        echo "<script>alert('Form submitted successfully. Wait for approval by administration.');</script>";
-    } else {
-        echo "<script>alert('Error: Could not register');</script>";
-    }
-
-    mysqli_stmt_close($stmt);
-} else {
-    echo "<script>alert('Error preparing statement');</script>";
-}
-
-
-
-
-
-
-        
-    } else {
-        // Display an alert if no matching student details are found
-        echo "<script>alert('Student details don\'t match with the college database');</script>";
-    }
-
-    // Close statement and connection
-    mysqli_stmt_close($checkStmt);
-    mysqli_close($conn);
-}
-?>
 
 
 <script>
@@ -206,3 +144,69 @@ if ($stmt) {
 </script>
 </body>
 </html>
+
+
+
+<?php
+if (isset($_POST['submit'])) {
+    // Collect and sanitize form data
+    $id = $_POST['id'] ?? '';
+    $name = $_POST['fullName'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $batch = $_POST['batch'] ?? '';
+    $username = $_POST['username'] ?? '';
+    $pass = $_POST['password'] ?? '';
+    $program = $_POST['program'] ?? '';
+
+
+
+
+    // Check if any required field is empty
+    if (empty($id) || empty($name) || empty($email) || empty($batch) || empty($username) || empty($pass) || empty($program)) {
+        echo "<script>alert('All fields are required.');</script>";
+        exit;
+    }
+
+    // Include database connection
+    include 'api/connection.php';
+
+    // Check if the entered student details match a record in the students table
+    $checkQuery = "SELECT * FROM students WHERE full_name = ? AND student_id = ? AND email = ? AND batch = ? AND program = ?";
+    $checkStmt = mysqli_prepare($conn, $checkQuery);
+    mysqli_stmt_bind_param($checkStmt, 'sssss', $name, $id, $email, $batch, $program);
+    mysqli_stmt_execute($checkStmt);
+    $result = mysqli_stmt_get_result($checkStmt);
+
+    // If a matching record is found, proceed with registration
+    if (mysqli_num_rows($result) > 0) {
+  
+
+$query = "INSERT INTO register (id, full_name, email, username, password, batch, program) VALUES (?, ?, ?, ?, ?, ?, ?)";
+$stmt = mysqli_prepare($conn, $query);
+
+if ($stmt) {
+    // Bind parameters and execute the query
+    mysqli_stmt_bind_param($stmt, 'sssssss', $id, $name, $email, $username, $pass, $batch, $program);
+
+    if (mysqli_stmt_execute($stmt)) {
+        echo "<script>alert('Form submitted successfully. Wait for approval by administration.');</script>";
+    } else {
+        echo "<script>alert('Error: Could not register');</script>";
+    }
+
+    mysqli_stmt_close($stmt);
+} else {
+    echo "<script>alert('Error preparing statement');</script>";
+}
+
+        
+    } else {
+        // Display an alert if no matching student details are found
+        echo "<script>alert('Student details don\'t match with the college database');</script>";
+    }
+
+    // Close statement and connection
+    mysqli_stmt_close($checkStmt);
+    mysqli_close($conn);
+}
+?>

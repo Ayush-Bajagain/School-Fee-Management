@@ -1,0 +1,208 @@
+/* General resets and box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Set font-family globally */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+/* Header styles */
+header {
+    background-color: #4d4d52;  /* Neutral color */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+header .logo img {
+    height: 50px;
+    width: 50px;  /* Ensure width and height are equal */
+    border-radius: 50%;  /* Circle shape */
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+header .title h1 {
+    font-size: 1.8em;
+    margin-left: 20px;
+}
+
+header .date-time p {
+    font-size: 1em;
+}
+
+/* Wrapper Styles */
+.wrapper {
+    display: flex;
+    min-height: calc(100vh - 80px); /* Adjust based on header height */
+}
+
+/* Sidebar Styles */
+aside.sidebar {
+    background-color: #444;  /* Match header */
+    color: white;
+    width: 250px;
+    padding-top: 20px;
+    position: sticky;  /* Keep sidebar static */
+    top: 0;
+    height: (100vh);  /* Adjust height based on content */
+    flex-shrink: 0;  /* Prevents sidebar from shrinking */
+}
+
+.sidebar .welcome {
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.sidebar .menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar .menu ul li {
+    margin: 10px 0;
+}
+
+.sidebar .menu ul li a {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.sidebar .menu ul li a:hover,
+.sidebar .menu ul li a.active {
+    background-color: #666;  /* Slightly lighter */
+}
+
+.sidebar #logout-btn a {
+    background-color: #e74c3c;
+    color: white;
+    padding: 12px 20px;
+    text-align: center;
+    font-weight: bold;
+    display: block;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.sidebar #logout-btn a:hover {
+    background-color: #c0392b;
+}
+
+/* Main Content Styles */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #fff;
+    overflow-y: auto;
+}
+
+
+
+.menu-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    display: none;
+
+}
+/* Responsive Styles */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    header .logo img {
+        height: 40px;
+        width: 40px;
+    }
+
+    header .title h1 {
+        font-size: 1.5em;
+    }
+
+    header .date-time {
+        display: none;
+    }
+
+    .wrapper {
+        flex-direction: column;
+        height: auto;  /* Allow content to determine height */
+    }
+
+    aside.sidebar {
+        width: 100%;
+        height: auto;  /* Adjust height based on content */
+        position: relative;  /* Static positioning */
+        padding: 10px 0;
+    }
+
+    .sidebar .menu ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .sidebar .menu ul li {
+        margin: 5px 0;
+    }
+
+    .sidebar .menu ul li a {
+        padding: 8px;
+    }
+
+    .sidebar #logout-btn a {
+        margin-top: 10px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .main-content {
+        padding: 15px;
+        height: auto;  /* Adjust to content */
+    }
+
+    .menu-icon {
+
+        display: block;
+
+    }
+    #nav-menu{
+        display: none;
+    }
+
+}
+
+@media (max-width: 480px) {
+    header .title h1 {
+        font-size: 1.2em;
+    }
+
+    .sidebar .menu ul li a {
+        font-size: 1em;
+        padding: 6px;
+    }
+
+    .sidebar #logout-btn a {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+
+    .main-content {
+        padding: 10px;
+    }
+}

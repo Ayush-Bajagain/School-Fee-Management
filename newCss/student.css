@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+
+
+
+
+
+.main-content {
+    padding: 50px;
+    background-color: #fff;
+    flex: 1;
+}
+
+.main-content section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.main-content section .box {
+    width: 350px;
+    height: 400px;
+    box-shadow: 1px 1px 10px -3px #00000066;
+    border-radius: 10px;
+    position: relative;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.box .photo {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 150px;
+    border: 1px solid #00000034;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 50px;
+}
+
+.box .photo img {
+    width: 100%;
+}
+
+.box a {
+    text-decoration: none;
+    color: #444;
+    font-size: 24px;
+    text-align: center;
+    font-family: "poppins";
+
+}
+
+.box a:hover {
+    color: royalblue;
+    font-weight: 600;
+    /*border-bottom: 2px solid #00000066;*/
+}
+
+/*---------------------- Responsive Design ----------------------*/
+
+@media (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+    }
+
+    
+    .menu-icon {
+
+        display: block;
+
+    }
+
+
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .main-content section .box {
+        width: 100%;
+        height: auto;
+    }
+
+    .box .photo {
+        width: 120px;
+        height: 120px;
+    }
+
+    .box a {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+   
+
+    .main-content {
+        padding: 10px;
+    }
+
+    .main-content section .box {
+        padding: 15px;
+    }
+
+    .box .photo {
+        width: 100px;
+        height: 100px;
+    }
+
+    .box a {
+        font-size: 18px;
+    }
+}
+
+
+
+#payment-noti{
+color: red;
+font-weight:600;
+padding:1px;
+
+}

@@ -1,3 +1,16 @@
+
+<?php
+session_start();
+$user_profile = $_SESSION["user_name"];
+$role = $_SESSION["role"];
+if (!$user_profile === true && !$role == "admin") {
+    header("location:../index.php");
+}
+?>
+
+
+
+
 <?php
 
 // Check if 'id' is set in the URL

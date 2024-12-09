@@ -1,0 +1,217 @@
+.main-content .make-payment {
+    width: 100%;
+}
+
+.make-payment #create-payment-btn {
+    font-size: 16px;
+    cursor: pointer;
+    height: 40px;
+    width: 139px;
+    opacity: 80%;
+    border: none;
+    border-radius: 10px;
+    background-color: royalblue;
+    color: #ffffff;
+    position: relative;
+    top: 18px;
+}
+
+.make-payment #create-payment-btn:hover {
+    opacity: 100%;
+}
+
+/* Form Styling */
+.make-payment #form-main {
+    width: fit-content;
+    height: fit-content;
+    padding: 40px;
+    border: 2px solid #33333343;
+    position: relative;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+    transition: .3s all ease;
+    display: none;
+}
+
+.make-payment form input,
+.make-payment form select {
+    margin: 15px 25px;
+    width: 300px;
+    height: 35px;
+    padding: 0 15px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    border-bottom: 1px solid #333333aa;
+}
+
+#submit-btn {
+    height: 40px;
+    border: none;
+    background-color: royalblue;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border: 0;
+    border-radius: 10px;
+}
+
+hr {
+    height: 2px;
+    border: none;
+    outline: none;
+    background-color: #33333378;
+    border-radius: 20px;
+}
+
+/* Table Container */
+.made-payment {
+    width: 100%;
+    padding: 50px 0;
+    margin-top: 20px;
+}
+
+.made-payment table {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+    overflow-x: auto;
+    display: block;  /* Enable scrolling for table */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Table Header and Cells */
+.made-payment th,
+.made-payment td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.made-payment th {
+    background-color: rgba(65, 105, 225, 0.857);
+    color: white;
+}
+
+.made-payment tr:hover {
+    outline: 1.1px solid #ccc;
+}
+
+/* Buttons */
+.view-btn, .edit-btn, .accept-btn, .decline-btn {
+    width: 70px;
+    height: 30px;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    
+    border: none;
+    text-decoration: none;
+    
+}
+
+.view-btn {
+    background-color: red;
+    
+}
+
+.edit-btn {
+    background-color: royalblue;
+}
+
+.edit-btn a, .view-btn a {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px;
+}
+
+
+
+.accept-btn {
+    background-color: royalblue;
+    padding: 10px;
+   
+    
+}
+
+.decline-btn {
+    background-color: red;
+    padding: 10px;
+}
+
+/* Popup Styling */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content img {
+    max-width: 90%;
+    max-height: 90%;
+    display: block;
+    margin: auto;
+}
+
+/* Media Queries for Small Screens */
+@media (max-width: 768px) {
+    .make-payment form input,
+    .make-payment form select {
+        width: 100%;  /* Full width for inputs on mobile */
+        margin: 10px;
+    }
+
+    #submit-btn {
+        width: 100%;
+    }
+
+    .made-payment table {
+        width: 100%;
+        overflow-x: auto;
+        display: block;
+    }
+
+    .made-payment th, .made-payment td {
+        width: 150px; /* Make table cells a bit more compact for smaller screens */
+        padding: 8px;
+    }
+
+    .view-btn,
+    .edit-btn,
+    .accept-btn,
+    .decline-btn {
+        width: 100%;  
+        margin-bottom: 5px;
+    }
+
+    .popup-content img {
+        max-width: 100%; /* Ensure images scale within the popup */
+    }
+}
+
+/* Additional adjustments for smaller screens */
+@media (max-width: 480px) {
+    .made-payment th, .made-payment td {
+        font-size: 12px;  /* Reduce font size for smaller screens */
+    }
+
+    .view-btn, .edit-btn, .accept-btn, .decline-btn {
+        font-size: 14px; 
+    }
+}
+
+
+#payment-noti{
+    color: red;
+    font-weight:600;
+   padding:1px; 
+}

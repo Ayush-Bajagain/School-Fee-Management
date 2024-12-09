@@ -3,8 +3,6 @@
     session_start();
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./newCss/style.css"/>
     <title>Login</title>
 </head>
 
@@ -22,16 +20,21 @@
             <fieldset class="outline">
                 <legend>Login</legend>
 
-                <div class="email-main">
+                <div class="form-group">
                     <label for="email">Email: </label>
-                    <input type="email" name="email" id="email" class="email" >
-                    <i class="bi bi-envelope"></i>
+                    <div class="input-wrapper">
+                        <input type="email" name="email" id="email" class="email" placeholder="Enter your email" required>
+                        <i class="bi bi-envelope"></i>
+                    </div>
                 </div>
 
-                <div class="password-main">
+                <div class="form-group">
                     <label for="password">Password:</label>
-                    <input type="password" name="password" id="password" class="password" >
-                    <i class="bi bi-lock"></i>
+                    <div class="input-wrapper">
+                        <input type="password" name="password" id="password" class="password" placeholder="Enter your password" required>
+                        <i class="bi bi-lock"></i>
+                        <!-- <i class="bi bi-eye-slash toggle-password" id="togglePassword"></i> -->
+                    </div>
                 </div>
 
                 <div class="content">
@@ -39,18 +42,38 @@
                     <label for="remember">Remember me</label>
                 </div>
 
-                <input type="submit" value="Login" id="login-btn" name="login">
+                <button type="submit" id="login-btn" name="login">Login</button>
 
                 <div class="register">
                     <span>Doesn't have an account? <a href="register.php">Register</a></span>
                 </div>
-
             </fieldset>
         </form>
     </div>
+
+    <script src="js/script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+
+            togglePassword.addEventListener('click', function () {
+                // Toggle the password field type
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+
+                // Toggle the eye icon class
+                this.classList.toggle('bi-eye');
+                this.classList.toggle('bi-eye-slash');
+            });
+        });
+
+    </script>
 </body>
 
 </html>
+
 
 
 <?php

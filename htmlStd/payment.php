@@ -7,56 +7,9 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment</title>
-    <link rel="stylesheet" href="../cssStd/studentLayout.css">
-
-    <style>
-        .menu ul li .active {
-            color: royalblue;
-        }
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .form-container {
-            width: 50%;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .form-container img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 10px 0;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-        }
-        .form-group button {
-            padding: 10px 15px;
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .form-group button:hover {
-            background-color: #218838;
-        }
-    </style>
+    <link rel="stylesheet" href="../newCss/layout.css">
+    <link rel="stylesheet" href="../studentCss/payment.css">
+    <title>Advance Payment</title>
 </head>
 <body>
 
@@ -101,46 +54,55 @@ $conn->close();
         <div class="title">
             <h1>Fee Management System</h1>
         </div>
+        <div class="date-time">
+            <p><?php echo date("m/d/Y h:i:s A"); ?></p>
+        </div>
     </header>
 
     <div class="wrapper">
         <aside class="sidebar">
+            <img src="../images/icon/menu.png" class="menu-icon" width="30" height="30" onclick="openNav()">
             <p class="welcome">Hello! <?php echo htmlspecialchars($_SESSION['std_name']); ?></p><br><br>
             <nav class="menu">
-                <ul>
+                <ul id="nav-menu">
                     <li><a href="studentHome.php">Home</a></li>
-                    <li><a href="notice.php">Notice</a></li>
-                    <li><a href="details.php">Fees Details</a></li>
+                    <li><a href="notice.php">Fee Notice</a></li>
+                    <li><a href="details.php">History</a></li>
                     <li><a href="payment.php" class="active">Payment</a></li>
-                    <li id="logout-bnt"><a href="../api/logout.php">Logout</a></li>
+                    <li id="logout-bnt"><a href="../api/logout.php" style=" display: block;color: white;text-decoration: none;background-color: #ff4d4d;padding: 8px 30px;border-radius: 5px;">Logout</a></li>
                 </ul>
             </nav>
         </aside>
 
         <main class="main-content">
             <div class="form-container">
-                <h2>Submit Transaction Details</h2>
-                <div class="photo-section">
-                    <label>Pay through e-sewa:</label>
-                    <img id="photo-preview" src="../images/esewaqr.jpg" alt="No Photo Uploaded" width="150" />
-                </div>
+                <h2>Advance Payment</h2>
+                <img src="../images/esewaqr.jpg" alt="E-Sewa QR Code">
+
                 <form action="" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="transaction_id">Transaction ID:</label>
-                        <input type="text" id="transaction_id" name="transaction_id" required />
-                    </div>
-                    <div class="form-group">
                         <label for="amount">Amount:</label>
-                        <input type="number" id="amount" name="amount" required />
+                        <input type="number" id="amount" name="amount" required>
                     </div>
+
+                    <div class="form-group">
+                        <label for="payment_purpose">Payment Purpose:</label>
+                        <select id="payment_purpose" name="payment_purpose">
+                            <option value="advance" selected>Advance</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="remarks">Remarks:</label>
                         <textarea id="remarks" name="remarks" rows="4"></textarea>
                     </div>
+
                     <div class="form-group">
-                        <label for="photo">Upload Photo of Payment:</label>
-                        <input type="file" id="photo" name="photo" accept="image/jpeg, image/png, image/jpg" required />
+                        <label for="photo">Upload Payment Screenshot:</label>
+                        <input type="file" id="photo" name="photo" accept="image/jpeg, image/png, image/jpg" required>
                     </div>
+
                     <div class="form-group">
                         <button type="submit">Submit</button>
                     </div>
@@ -152,8 +114,8 @@ $conn->close();
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 include("../api/connection.php");
 
-                $transaction_id = $_POST['transaction_id'];
                 $amount = $_POST['amount'];
+                $payment_purpose = $_POST['payment_purpose'];
                 $remarks = $_POST['remarks'];
 
                 // Handle file upload
@@ -162,53 +124,34 @@ $conn->close();
                 $max_file_size = 2 * 1024 * 1024; // 2MB
                 $target_dir = "uploads/";
 
-                // Validate file upload
-                if (!is_uploaded_file($photo['tmp_name'])) {
-                    echo "<p style='color: red;'>Invalid file upload.</p>";
+                if (!is_uploaded_file($photo['tmp_name']) || !in_array($photo['type'], $allowed_types) || $photo['size'] > $max_file_size) {
+                    echo "<p style='color: red;'>Invalid file upload. Please try again.</p>";
                     exit;
                 }
 
-                if (!in_array($photo['type'], $allowed_types)) {
-                    echo "<p style='color: red;'>Invalid file type. Only JPG and PNG files are allowed.</p>";
-                    exit;
-                }
-
-                if ($photo['size'] > $max_file_size) {
-                    echo "<p style='color: red;'>File size exceeds the limit of 2MB.</p>";
-                    exit;
-                }
-
-                // Generate a unique file name
                 $photo_name = time() . '_' . basename($photo['name']);
                 $target_file = $target_dir . $photo_name;
 
-                // Check if the target directory is writable
                 if (!is_writable($target_dir)) {
                     echo "<p style='color: red;'>Upload directory is not writable.</p>";
                     exit;
                 }
 
-                // Move the uploaded file
                 if (move_uploaded_file($photo['tmp_name'], $target_file)) {
-                    // Insert data into database
-                    $query = "INSERT INTO transaction_details 
-                              (transaction_id, amount, remark, photo, batch, student_id, email, program) 
-                              VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                    $query = "INSERT INTO advance_payment 
+                                (student_id, email, program, batch, amount, payment_purpose, photo, remark) 
+                                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
                     $stmt = $conn->prepare($query);
-                    if ($stmt) {
-                        $stmt->bind_param("sdssssss", $transaction_id, $amount, $remarks, $photo_name, $batch1, $student_id1, $user_profile, $program1);
+                    $stmt->bind_param("ssssssss", $student_id1, $user_profile, $program1, $batch1, $amount, $payment_purpose, $photo_name, $remarks);
 
-                        if ($stmt->execute()) {
-                            echo "<p style='color: green;'>Transaction details submitted successfully!</p>";
-                        } else {
-                            echo "<p style='color: red;'>Database error: " . $stmt->error . "</p>";
-                        }
-
-                        $stmt->close();
+                    if ($stmt->execute()) {
+                        echo "<p style='color: green;'>Payment details submitted successfully!</p>";
                     } else {
-                        echo "<p style='color: red;'>Database statement preparation error: " . $conn->error . "</p>";
+                        echo "<p style='color: red;'>Error: " . $stmt->error . "</p>";
                     }
+
+                    $stmt->close();
                 } else {
                     echo "<p style='color: red;'>Failed to upload photo. Please try again.</p>";
                 }
@@ -220,6 +163,8 @@ $conn->close();
     </div>
 </div>
 
+
+<script src="../js/navigationRespon.js"></script>
 <script src="../js/homepageTimeUpdate.js"></script>
 </body>
 </html>

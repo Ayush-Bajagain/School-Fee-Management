@@ -1,32 +1,42 @@
+
+<?php
+session_start();
+$user_profile = $_SESSION["user_name"];
+$role = $_SESSION["role"];
+if (!$user_profile === true && !$role == "admin") {
+    header("location:../index.php");
+}
+?>
+
 <?php
 include "../api/connection.php";
 
-// Check if 'id' is present in the GET request
 if (isset($_GET["id"])) {
-    // Get and sanitize the ID from the GET request
-    $id = intval($_GET["id"]); // Ensure $id is an integer
+    //
+    $id = intval($_GET["id"]);
 
-    // Prepare the DELETE query with a placeholder
+
     $query = "DELETE FROM makepayment WHERE id = ?";
+    $query1 = "DELETE FROM other_payment WHERE id = ?";
 
-    // Create a prepared statement
+
     if ($stmt = $conn->prepare($query)) {
-        // Bind the ID parameter to the query
         $stmt->bind_param("i", $id);
-
-        // Execute the prepared statement
         $stmt->execute();
-
-        // Close the prepared statement
         $stmt->close();
     }
 
-    // Close the database connection
+
+
+    if ($stmt = $conn->prepare($query1)) {
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+
     $conn->close();
 }
-
-// Redirect back to the previous page (if needed)
-// If you don't need a redirect, you can remove the following line
 header("Location: payment.php");
 exit();
 ?>

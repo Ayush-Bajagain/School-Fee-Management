@@ -1,0 +1,89 @@
+/* General Table Styling */
+table {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+    overflow-x: auto; /* Enable horizontal scroll for the table */
+    display: block; /* Ensure it behaves like a block element */
+    max-height: 300px; /* Limit the table height */
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+    white-space: nowrap; /* Prevent content from wrapping */
+}
+
+th {
+    background-color: rgba(65, 105, 225, 0.857);
+    color: white;
+}
+
+tr:hover {
+    outline: 1.1px solid #ccc;
+}
+
+
+
+.pay-btn{
+    text-decoration: none;
+    color:#fff;
+    background-color: royalblue;
+    border: none;
+    padding: 5px 20px;
+    border-radius: 8px;
+}
+
+
+/* Container Styling */
+.main-content {
+    padding: 20px;
+    overflow: hidden; /* Prevents page scrolling */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+
+
+
+/* Responsive Behavior */
+@media screen and (max-width: 768px) {
+    .main-content {
+        padding: 10px; /* Reduce padding */
+    }
+
+    table {
+        overflow-x: auto; /* Horizontal scrolling for table */
+        max-height: 300px; /* Limit table height */
+    }
+
+    th, td {
+        padding: 8px; /* Reduce padding */
+        font-size: 14px; /* Adjust font size */
+    }
+
+    .view-btn {
+        width: 60px; /* Smaller button */
+        font-size: 14px; /* Adjust button text size */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    table {
+        max-height: 250px; /* Adjust table height for small screens */
+    }
+
+    th, td {
+        padding: 6px; /* Further reduce padding */
+        font-size: 12px; /* Smaller font size */
+    }
+
+    .view-btn {
+        width: 50px; /* Compact button */
+        height: 25px;
+        font-size: 12px;
+    }
+}

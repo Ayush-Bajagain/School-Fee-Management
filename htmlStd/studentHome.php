@@ -31,317 +31,218 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../studentCss/homePage.css" />
+    <link rel="stylesheet" href="../newCss/layout.css" />
+    <style>
+        #notification-text {
+            text-decoration: none;
+            color: #444;
+            font-size: 20px;
+        }
 
-<!--    <link rel="stylesheet" href="../cssStd/studentLayout.css"/>-->
-<!--    <link rel="stylesheet" href="../cssStd/home.css"/>-->
-
+        #notification-text:hover {
+            color: red;
+            text-decoration: underline;
+        }
+    </style>
     <title>Dashboard</title>
 
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            min-height: 100vh;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        .header {
-            background-color: #333;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-        }
-
-        .logo {
-            width: 75px;
-            height: 75px;
-            border-radius: 50%;
-            overflow: hidden;
-        }
-
-        .logo img {
-            width: 100%;
-            height: auto;
-        }
-
-        .title h1 {
-            font-size: 24px;
-            margin-left: 20px;
-        }
-
-        .date-time {
-            text-align: right;
-        }
-
-        .wrapper {
-            display: flex;
-            flex: 1;
-            width: 100%;
-            flex-direction: row;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            background-color: #2b2b2b;
-            color: white;
-            padding: 20px;
-            width: 250px;
-            height: 100vh;
-            position: sticky;
-            top: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .sidebar .welcome {
-            margin-bottom: 20px;
-            font-weight: bold;
-            color: yellow;
-        }
-
-        .menu ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            align-items: center;
-            flex-grow: 1;
-            justify-content: center;
-        }
-
-        .menu ul li {
-            text-align: center;
-        }
-
-        .menu ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-        }
-
-        .menu ul li .active {
-            color: royalblue;
-        }
-
-        .menu ul li a:hover {
-            color: royalblue;
-        }
-
-        #logout-btn {
-            margin-top: auto;
-            background-color: red;
-            height: 35px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 80%;
-            border-radius: 4px;
-        }
-        #logout-btn a{
-            padding: 16px 35px;
-            color: #fff;
-
-        }
-
-        #logout-btn:hover {
-            opacity: 100%;
-        }
-
-
-
-        .main-content {
-            flex: 1;
-            padding: 20px;
-            background-color: #fff;
-        }
-
-
-        .dtl-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            padding: 20px 0;
-        }
-
-        .card {
-            height: 400px;
-            border-radius: 10px;
-            box-shadow: 1px 1px 10px -1px #333;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .card .photo {
-            border-radius: 50%;
-            overflow: hidden;
-            width: 130px;
-            height: 130px;
-        }
-
-        .card .photo img {
-            width: 100%;
-        }
-
-        .card h3 {
-            font-size: 24px;
-            margin: 20px 0;
-        }
-
-        .card strong {
-            font-size: 28px;
-        }
-
-        /* Responsive Design */
-        @media screen and (max-width: 768px) {
-            .wrapper {
-                flex-direction: column;
-            }
-
-            .sidebar {
-
-                width: 100%;
-                height: fit-content;
-                position: relative;
-            }
-
-            .main-content {
-                padding: 10px;
-            }
-
-            .card {
-                height: auto;
-            }
-
-            .card h3, .card strong {
-                font-size: 22px;
-                text-align: center;
-            }
-        }
-
-
-        @media screen and (max-width: 480px) {
-            .header .title h1 {
-                font-size: 18px;
-            }
-
-            .date-time p {
-                font-size: 14px;
-            }
-
-            .menu ul li a {
-                font-size: 16px;
-            }
-
-            .card h3, .card strong {
-                font-size: 18px;
-            }
-
-            .card {
-                padding: 20px;
-            }
-        }
-    </style>
 
 </head>
+
 <body>
 
-<div class="container">
-    <header class="header">
-        <div class="logo">
-            <img src="../images/kcmit.jpg" alt="School Logo">
-        </div>
-        <div class="title">
-            <h1>Fee Management System</h1>
-        </div>
-        <div class="date-time">
-            <p>08/30/2024 10:23:15 AM</p>
-        </div>
-    </header>
-
-    <div class="wrapper">
-        <aside class="sidebar">
-            <p class="welcome">Hello! <?php echo $_SESSION['std_name']; ?></p><br><br>
-            <nav class="menu">
-                <ul>
-                    <li><a href="#" class="active">Home</a></li>
-                    <li><a href="notice.php">Notice</a></li>
-                    <li><a href="details.php">Fees Details</a></li>
-                    <li><a href="payment.php">Payment</a></li>
-                    <li id="logout-btn"><a href="../api/logout.php">Logout</a></li>
-                </ul>
-            </nav>
-        </aside>
-
-        <main class="main-content">
-            <?php
-            include("../api/connection.php");
-
-            // Fetch fee details for the logged-in student
-            $sql = "SELECT * FROM fee_details WHERE student_id=?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("s", $student_id_main);
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $total_fee =  $row['total_fee'];
-                $paid_fee =  $row['paid_fee'];
-                $due_fee =  $row['due_fee'];
-            } else {
-                echo "Amount details not found";
-            }
-
-            $stmt->close();
-            $conn->close();
-            ?>
-
-            <div class="dtl-section">
-                <div class="card total">
-                    <div class="photo">
-                        <img src="../images/totalfee.jpg" alt="Total Fee">
-                    </div>
-                    <h3>Total Fee</h3>
-                    <strong><?php echo $total_fee; ?></strong>
-                </div>
-                <div class="card paid">
-                    <div class="photo">
-                        <img src="../images/paid.jpg" alt="Paid Fee">
-                    </div>
-                    <h3>Paid Fee</h3>
-                    <strong><?php echo $paid_fee; ?></strong>
-                </div>
-                <div class="card due">
-                    <div class="photo">
-                        <img src="../images/paymentDue.jpg" alt="Due Fee">
-                    </div>
-                    <h3>Due Fee</h3>
-                    <strong><?php echo $due_fee; ?></strong>
-                </div>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <img src="../images/kcmit.jpg" alt="School Logo">
             </div>
-        </main>
+            <div class="title">
+                <h1>Fee Management System</h1>
+            </div>
+            <div class="date-time">
+                <p>08/30/2024 10:23:15 AM</p>
+            </div>
+        </header>
+
+        <div class="wrapper">
+            <aside class="sidebar">
+                <img src="../images/icon/menu.png" class="menu-icon" width="30" height="30" onclick="openNav()">
+                <p class="welcome">Hello! <?php echo $_SESSION['std_name']; ?></p><br><br>
+
+                <nav class="menu">
+                    <ul id="nav-menu">
+                        <li><a href="#" class="active">Home</a></li>
+                        <li><a href="notice.php">Fee Notice</a></li>
+                        <li><a href="details.php">History</a></li>
+                        <li><a href="payment.php">Payment</a></li>
+                        <li id="logout-bnt"><a href="../api/logout.php" style=" display: block;color: white;text-decoration: none;background-color: #ff4d4d;padding: 8px 30px;border-radius: 5px;">Logout</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <?php
+                include("../api/connection.php");
+
+                // Fetch fee details for the logged-in student
+                $sql = "SELECT * FROM fee_details WHERE student_id=?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("s", $student_id_main);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $total_fee =  $row['total_fee'];
+                    $paid_fee =  $row['paid_fee'];
+                    $due_fee =  $row['due_fee'];
+                } else {
+                    echo "Amount details not found";
+                }
+
+                $stmt->close();
+                $conn->close();
+                ?>
+
+                <div class="dtl-section">
+                    <div class="card total">
+                        <a href="#" style="color: #333; text-decoration: none;">
+
+                            <div class="photo">
+                                <img src="../images/totalfee.jpg" alt="Total Fee">
+                            </div>
+                            <h3>Total Fee</h3>
+                            <strong><?php echo $total_fee; ?></strong>
+                        </a>
+                    </div>
+                    <div class="card paid">
+                        <a href="details.php" style="color: #333; text-decoration: none;">
+
+                            <div class="photo">
+                                <img src="../images/paid.jpg" alt="Paid Fee">
+                            </div>
+                            <h3>Paid Fee</h3>
+                            <strong><?php echo $paid_fee; ?></strong>
+                        </a>
+                    </div>
+                    <div class="card due">
+                        <a href="#" style="color: #333; text-decoration: none;">
+
+                            <div class="photo">
+                                <img src="../images/paymentDue.jpg" alt="Due Fee">
+                            </div>
+                            <h3>Due Fee</h3>
+                            <strong><?php echo $due_fee; ?></strong>
+                        </a>
+                    </div>
+                </div>
+
+
+
+
+                <div class="notification">
+
+
+
+
+
+
+                    <?php
+                    //This is for fetching the program and batch of student
+                    include("../api/connection.php");
+                    $email = $user_profile;
+
+                    $query = "SELECT program, batch, student_id FROM students WHERE email = ?";
+                    $stmt = $conn->prepare($query);
+                    $stmt->bind_param("s", $email);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $program = $row['program'];
+                            $batch = $row['batch'];
+                            $student_id = $row['batch'];
+                        }
+                    }
+                    $stmt->close();
+                    $conn->close();
+                    ?>
+
+
+
+                    <?php
+                    include '../api/connection.php';
+
+
+                    try {
+                        // Query to count rows in individual_payment
+                        $query1 = $conn->prepare("SELECT COUNT(*) AS num_rows FROM individual_payment WHERE student_id = ? AND student_email = ?");
+                        if ($query1) {
+                            $query1->bind_param("ss", $student_id_main, $email);
+                            $query1->execute();
+                            $query1->bind_result($count_individual);
+                            $query1->fetch();
+                            $query1->close();
+                        } else {
+                            throw new Exception("Query1 failed: " . $conn->error);
+                        }
+
+                        // Query to count rows in make_payment
+                        $query2 = $conn->prepare("SELECT COUNT(*) AS num_rows FROM makepayment WHERE program = ? AND batch = ?");
+                        if ($query2) {
+                            $query2->bind_param("ss", $program, $batch);
+                            $query2->execute();
+                            $query2->bind_result($count_make_payment);
+                            $query2->fetch();
+                            $query2->close();
+                        } else {
+                            throw new Exception("Query2 failed: " . $conn->error);
+                        }
+
+                        // Query to count rows in other_payment
+                        $query3 = $conn->prepare("SELECT COUNT(*) AS num_rows FROM other_payment WHERE program = ? AND batch = ?");
+                        if ($query3) {
+                            $query3->bind_param("ss", $program, $batch);
+                            $query3->execute();
+                            $query3->bind_result($count_other_payment);
+                            $query3->fetch();
+                            $query3->close();
+                        } else {
+                            throw new Exception("Query3 failed: " . $conn->error);
+                        }
+
+                        // Check if there is data in any of the three tables
+                        if ($count_individual > 0 || $count_make_payment > 0 || $count_other_payment > 0) {
+                            echo '<a href="notice.php" id="notification-text">You have new notification...</a>';
+                        }
+                    } catch (Exception $e) {
+                        echo "<p style='color: red;'>Error: " . $e->getMessage() . "</p>";
+                    }
+
+                    $conn->close();
+                    ?>
+
+
+                </div>
+            </main>
+        </div>
+
+
     </div>
 
-</div>
-<script src="../js/homepageTimeUpdate.js"></script>
+    <script src="../js/homepageTimeUpdate.js"></script>
+    <script src="../js/navigationRespon.js"></script>
+
+
+
+
 </body>
+
 </html>

@@ -1,0 +1,184 @@
+
+/* Main Content Container */
+.main-content {
+    padding: 20px;
+    background-color: #fff;
+    margin: 20px auto;
+    max-width: 900px; /* Adjust the width for larger screens */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Go Back Button */
+.main-content .go-back {
+    width: 150px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: royalblue;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+/* Form Container */
+.main-content form {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rosybrown;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Photo Section */
+form .photo {
+    width: 100%;               
+    height: auto;              
+    margin-bottom: 20px;       
+    position: relative;
+    text-align: center;
+}
+
+form .photo input {
+    width: 100%;
+    opacity: 80%;
+    cursor: pointer;
+}
+
+/* Initially hidden photo */
+form .photo img {
+    display: none;             
+    width: 100%;                
+    max-height: 300px;         
+    object-fit: contain;        
+    border-radius: 10px;       
+}
+
+/* Input Box Container */
+form .box {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+form .box span {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+/* Input Fields */
+.box input,
+.program span select {
+    margin-top: 8px;
+    padding: 10px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    width: 100%;
+}
+
+/* Gender Section */
+.gender {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.gender span {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+/* Program and Batch Section */
+.program {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.program span {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+/* Submit Button */
+#submit-btn {
+    width: 100%;
+    height: 45px;
+    background-color: royalblue;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#submit-btn:hover {
+    background-color: darkblue;
+}
+
+/* Error Message */
+#error-msg {
+    color: red;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+    form .box {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    form .box span {
+        width: 48%;
+    }
+
+    .gender span {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .program {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .program span {
+        width: 48%;
+    }
+
+    #submit-btn {
+        width: 200px;
+        margin: 20px auto 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .main-content {
+        padding: 15px;
+    }
+
+    .main-content .go-back {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .photo {
+        width: 100%;
+        height: auto;
+    }
+
+    #submit-btn {
+        width: 100%;
+    }
+}
