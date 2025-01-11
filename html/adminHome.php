@@ -4,38 +4,40 @@ session_start();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="stylesheet" href="../newCss/layout.css">
     <link rel="stylesheet" href="../newCss/adminHome.css">
 </head>
+
 <body>
 
     <?php
-        $user_profile = $_SESSION["user_name"];
-        $role = $_SESSION["role"];
+    $user_profile = $_SESSION["user_name"];
+    $role = $_SESSION["role"];
 
-        if (!$user_profile || $role !== "admin") {
-            header("location:../index.php");
-        }
+    if (!$user_profile || $role !== "admin") {
+        header("location:../index.php");
+    }
     ?>
 
 
 
-    <?php  
-        include("../api/connection.php");
+    <?php
+    include("../api/connection.php");
 
-        // SQL query to count the rows in the table
-        $sql_count = "SELECT COUNT(*) as total_rows FROM transaction_details";
-        $result_count = $conn->query($sql_count);
+    // SQL query to count the rows in the table
+    $sql_count = "SELECT COUNT(*) as total_rows FROM transaction_details";
+    $result_count = $conn->query($sql_count);
 
-        if ($result_count->num_rows > 0) {
-            $row_count = $result_count->fetch_assoc();
-            $no_row1 = $row_count['total_rows'] . "<br>";
-        } 
+    if ($result_count->num_rows > 0) {
+        $row_count = $result_count->fetch_assoc();
+        $no_row1 = $row_count['total_rows'] . "<br>";
+    }
     ?>
     <div class="container">
         <header class="header">
@@ -57,12 +59,12 @@ session_start();
                 <nav class="menu">
                     <ul id="nav-menu">
                         <li><a href="#" class="active">Dashboard</a></li>
-                        <li><a href="student.php" >Student</a></li>
-                        <li><a href="payment.php">Payment <?php 
-                            if($no_row1>1){
-                                echo "<sup id= 'payment-noti'>$no_row1</sup>";
-                            } 
-                            ?></a>
+                        <li><a href="student.php">Student</a></li>
+                        <li><a href="payment.php">Payment <?php
+                                                            if ($no_row1 > 1) {
+                                                                echo "<sup id= 'payment-noti'>$no_row1</sup>";
+                                                            }
+                                                            ?></a>
                         </li>
                         <li><a href="application.php">Application</a></li>
                         <li id="logout-bnt"><a href="../api/logout.php" style=" display: block;color: white;text-decoration: none;background-color: #ff4d4d;padding: 8px 30px;border-radius: 5px;">Logout</a></li>
@@ -72,14 +74,12 @@ session_start();
 
             <main class="main-content">
                 <section class="first-section">
-                    <div class="enrolled-box">
-                        <a href="viewStudent.php">
+                    <a href="viewStudent.php" class="enrolled-box boxx" style="text-decoration: none;">
+                        <div>
                             <section class="photo">
                                 <img src="../images/enrolled.jpg" alt="Photo of enrolled students">
                             </section>
-                            <a href="viewStudent.php" style="text-decoration: none">
-                                <h2>Enrolled Students</h2>
-                            </a>
+                            <h2>Enrolled Students</h2>
                             <?php
                             include("../api/connection.php");
                             $sql = "SELECT COUNT(*) AS student_count FROM students";
@@ -88,18 +88,15 @@ session_start();
                             $student_count = $row['student_count'];
                             ?>
                             <p class='count-std'><?php echo $student_count; ?></p>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
 
-                    <div class="fee-collection-box">
-                        <a href="paymentHistory.php">
+                    <a href="paymentHistory.php" class="fee-collection-box boox" style="text-decoration: none;">
+                        <div>
                             <section class="photo">
                                 <img src="../images/payment.jpg" alt="Fee collection">
                             </section>
-                            <a href="paymentHistory.php" style="text-decoration: none">
-                                <h2>Total Fee Collection</h2>
-                            </a>
-
+                            <h2>Total Fee Collection</h2>
                             <?php
                             include("../api/connection.php");
 
@@ -114,23 +111,17 @@ session_start();
                                 }
                             }
                             ?>
-
                             <p class="count-fee"><?php echo $total_sum; ?></p>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
 
-                    <div class="due-box">
-                        <a href="">
-
+                    <a href="#" class="due-box boox" style="text-decoration: none;">
+                        <div>
                             <section class="photo">
                                 <img src="../images/fee_due.jpg" alt="Due fee students">
                             </section>
-                            <a href="#" style="text-decoration: none">
-                                <h2>Due Fee</h2>
-                            </a>
-
+                            <h2>Due Fee</h2>
                             <?php
-                            // Calculate due fee
                             include("../api/connection.php");
 
                             $sql = "SELECT total_fee, paid_fee FROM fee_details";
@@ -143,23 +134,23 @@ session_start();
                                     $total_fee = $row['total_fee'];
                                     $paid_fee = $row['paid_fee'];
 
-                                    // Calculate due fee as total fee minus paid fee
                                     $due_fee = $total_fee - $paid_fee;
                                     $total_due_fee += $due_fee;
                                 }
                             }
                             ?>
-
                             <p class="count-due"><?php echo $total_due_fee; ?></p>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </section>
+
+
 
 
 
                 <button onclick="showOtherPayment()" id="showOtherPaymentBtn">Show other payments</button>
 
-                <section class="other-fee-field" id= "other-payment-table">
+                <section class="other-fee-field" id="other-payment-table">
                     <?php
                     include("../api/connection.php");
 
@@ -167,7 +158,7 @@ session_start();
                     $sql = "SELECT transaction_id, student_id, email, batch, program, photo, remark, payment_purpose, amount FROM payment_history WHERE payment_purpose != 'regular'";
                     $result = $conn->query($sql);
                     ?>
-                                
+
                     <h2>Payment History (Non-Regular Payments)</h2>
 
                     <table>
@@ -220,9 +211,9 @@ session_start();
 
 
 
-                <div  >
-                <?php
-                    
+                <div>
+                    <?php
+
                     include("../api/connection.php");
 
                     // Initialize variables for row counts
@@ -251,104 +242,108 @@ session_start();
                     $conn->close();
                     $totalRow = $transaction_count + $register_count;
                     ?>
-                    
 
 
-                    <button onclick="showNotification()" id="notification-btn">Notification<?php echo"<sup style='color:red; font-weight:600;'>$totalRow</sup>"?></button>
-                
+
+                    <button onclick="showNotification()" id="notification-btn">Notification<?php echo "<sup style='color:red; font-weight:600;'>$totalRow</sup>" ?></button>
+
                     <div id="notificationTable" class="notification">
 
 
                         <?php
-                            
-                            include("../api/connection.php");
 
-                            
-                            $registerData = [];
-                            $transactionData = [];
+                        include("../api/connection.php");
 
-                            
-                            $sql_register = "SELECT id, full_name, program, batch FROM register";
-                            $result_register = $conn->query($sql_register);
 
-                            if ($result_register->num_rows > 0) {
-                                while ($row = $result_register->fetch_assoc()) {
-                                    $registerData[] = $row;
-                                }
+                        $registerData = [];
+                        $transactionData = [];
+
+
+                        $sql_register = "SELECT id, full_name, program, batch FROM register";
+                        $result_register = $conn->query($sql_register);
+
+                        if ($result_register->num_rows > 0) {
+                            while ($row = $result_register->fetch_assoc()) {
+                                $registerData[] = $row;
                             }
+                        }
 
-                            
-                            $sql_transaction = "SELECT transaction_id, student_id, amount, batch, program FROM transaction_details";
-                            $result_transaction = $conn->query($sql_transaction);
 
-                            if ($result_transaction->num_rows > 0) {
-                                while ($row = $result_transaction->fetch_assoc()) {
-                                    $transactionData[] = $row;
-                                }
-                            }                    
-                            $conn->close();
+                        $sql_transaction = "SELECT transaction_id, student_id, amount, batch, program FROM transaction_details";
+                        $result_transaction = $conn->query($sql_transaction);
+
+                        if ($result_transaction->num_rows > 0) {
+                            while ($row = $result_transaction->fetch_assoc()) {
+                                $transactionData[] = $row;
+                            }
+                        }
+                        $conn->close();
                         ?>
 
 
-                                    
-                                    
+
+
 
                         <!-- Register Table -->
                         <div class="table-container" id="registerTableContainer">
                             <h2>Register Table</h2>
                             <table id="registerTable">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Full Name</th>
+                                    <th>Program</th>
+                                    <th>Batch</th>
+                                    <th>Action</th>
+                                </tr>
+                                <?php if (!empty($registerData)): ?>
+                                    <?php foreach ($registerData as $row): ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars($row['id']); ?></td>
+                                            <td><?php echo htmlspecialchars($row['full_name']); ?></td>
+                                            <td><?php echo htmlspecialchars($row['program']); ?></td>
+                                            <td><?php echo htmlspecialchars($row['batch']); ?></td>
+                                            <td><?php echo "<a href='application.php'>view</a>" ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Full Name</th>
-                                        <th>Program</th>
-                                        <th>Batch</th>
-                                        <th>Action</th>
+                                        <td colspan="5">No data found in the Register table.</td>
                                     </tr>
-                                    <?php if (!empty($registerData)): ?>
-                                        <?php foreach ($registerData as $row): ?>
-                                            <tr>
-                                                <td><?php echo htmlspecialchars($row['id']); ?></td>
-                                                <td><?php echo htmlspecialchars($row['full_name']); ?></td>
-                                                <td><?php echo htmlspecialchars($row['program']); ?></td>
-                                                <td><?php echo htmlspecialchars($row['batch']); ?></td>
-                                                <td><?php echo "<a href='application.php'>view</a>"?></td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    <?php else: ?>
-                                        <tr><td colspan="5">No data found in the Register table.</td></tr>
-                                    <?php endif; ?>
-                                </table>
-                            </div>
-
-                            <!-- Transaction Details Table -->
-                            <div class="table-container" id="transactionTableContainer">
-                                <h2>Transaction Details Table</h2>
-                                <table id="transactionTable">
-                                    <tr>
-                                        <th>Transaction ID</th>
-                                        <th>Student ID</th>
-                                        <th>Amount</th>
-                                        <th>Batch</th>
-                                        <th>Program</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    <?php if (!empty($transactionData)): ?>
-                                        <?php foreach ($transactionData as $row): ?>
-                                            <tr>
-                                                <td><?php echo htmlspecialchars($row['transaction_id']); ?></td>
-                                                <td><?php echo htmlspecialchars($row['student_id']); ?></td>
-                                                <td><?php echo htmlspecialchars($row['amount']); ?></td>
-                                                <td><?php echo htmlspecialchars($row['batch']); ?></td>
-                                                <td><?php echo htmlspecialchars($row['program']); ?></td>
-                                                <td><?php echo "<a href='payment.php'>view</a>"?></td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    <?php else: ?>
-                                        <tr><td colspan="6">No data found in the Transaction Details table.</td></tr>
-                                    <?php endif; ?>
-                                </table>
-                            </div>
+                                <?php endif; ?>
+                            </table>
                         </div>
+
+                        <!-- Transaction Details Table -->
+                        <div class="table-container" id="transactionTableContainer">
+                            <h2>Transaction Details Table</h2>
+                            <table id="transactionTable">
+                                <tr>
+                                    <th>Transaction ID</th>
+                                    <th>Student ID</th>
+                                    <th>Amount</th>
+                                    <th>Batch</th>
+                                    <th>Program</th>
+                                    <th>Action</th>
+                                </tr>
+                                <?php if (!empty($transactionData)): ?>
+                                    <?php foreach ($transactionData as $row): ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars($row['transaction_id']); ?></td>
+                                            <td><?php echo htmlspecialchars($row['student_id']); ?></td>
+                                            <td><?php echo htmlspecialchars($row['amount']); ?></td>
+                                            <td><?php echo htmlspecialchars($row['batch']); ?></td>
+                                            <td><?php echo htmlspecialchars($row['program']); ?></td>
+                                            <td><?php echo "<a href='payment.php'>view</a>" ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="6">No data found in the Transaction Details table.</td>
+                                    </tr>
+                                <?php endif; ?>
+                            </table>
+                        </div>
+                    </div>
                 </div>
 
             </main>
@@ -373,34 +368,31 @@ session_start();
     </script>
 
     <script>
-    // Open modal with photo
-    function openModal(photoUrl) {
-        document.getElementById('modal').style.display = "block";
-        document.getElementById('modal-content').src = photoUrl;
-    }
+        // Open modal with photo
+        function openModal(photoUrl) {
+            document.getElementById('modal').style.display = "block";
+            document.getElementById('modal-content').src = photoUrl;
+        }
 
-    // Close modal
-    function closeModal() {
-        document.getElementById('modal').style.display = "none";
-    }
+        // Close modal
+        function closeModal() {
+            document.getElementById('modal').style.display = "none";
+        }
     </script>
 
 
     <script>
         var tableData = document.getElementById("notificationTable");
-        // var a = document.getElementById("show-hide-notification");
         var visible = 1;
 
         function showNotification() {
             if (visible == 0) {
                 tableData.style.display = "none";
-                // a.innerHTML = "Show";
-                // a.style.background = "royalblue";
+           
                 visible = 1;
             } else {
                 tableData.style.display = "block";
-                // a.innerHTML = "Hide";
-                // a.style.background = "#d00";
+               
                 visible = 0;
             }
         }
@@ -408,23 +400,24 @@ session_start();
 
 
     <script>
-            var form = document.getElementById('other-payment-table');
-            var display = 0;
+        var form = document.getElementById('other-payment-table');
+        var display = 0;
 
-            function showOtherPayment() {
+        function showOtherPayment() {
 
-                if (display == 0) {
-                    form.style.display = 'block';
-                    display = 1;
-                } else {
-                    form.style.display = 'none';
-                    display = 0;
-                }
-
+            if (display == 0) {
+                form.style.display = 'block';
+                display = 1;
+            } else {
+                form.style.display = 'none';
+                display = 0;
             }
+
+        }
     </script>
 
 
 
 </body>
+
 </html>

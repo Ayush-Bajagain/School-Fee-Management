@@ -3,7 +3,7 @@
 ?>
 
 <?php
-    $user_profile = $_SESSION["email"];
+    $user_profile = $_SESSION["user_name"];
     $role = $_SESSION["role"];
 
     

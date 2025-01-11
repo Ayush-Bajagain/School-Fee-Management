@@ -656,13 +656,13 @@ if (isset($_GET['accept_id'])) {
 
 
     $student_id = $row['student_id'];
-    $email = $row['email'] ?? '';  // Default if email is not present
+    $email = $row['email'] ?? '';  
     $batch = $row['batch'] ?? '';
     $program = $row['program'] ?? '';
     $photo = $row['photo'] ?? '';
     $remark = $row['remark'] ?? '';
     $amount = $row['amount'];
-    $payment_purpose = $row['payment_purpose'];  // Regular or other
+    $payment_purpose = $row['payment_purpose'];  
 
     // Begin transaction for data integrity
     $conn->begin_transaction();
@@ -677,7 +677,7 @@ if (isset($_GET['accept_id'])) {
         }
 
         // Handle based on payment purpose
-        if (strtolower($payment_purpose) === 'regular') {
+        if (strtolower($payment_purpose) === 'regular' || strtolower($payment_purpose) === 'advance') {
             // Update fee_details table for regular payments
             $feeDetailsQuery = "SELECT total_fee, paid_fee FROM fee_details WHERE student_id = ?";
             $feeDetailsStmt = $conn->prepare($feeDetailsQuery);

@@ -117,16 +117,32 @@
             background-color: royalblue;
             color: white;
             border: none;
-            padding: 12px;
+            padding: 12px 0;
             font-size: 16px;
             width: 100%;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            margin-top: 10px;
+            overflow: hidden;
         }
 
         button:hover {
             background-color: darkblue;
+        }
+
+        .cancle-btn{
+            height: 100%;
+            width: 10%;
+            text-decoration: none;
+            color: #fff;
+            padding: 15px 180px;
+            background-color: red;
+
+        }
+
+        .cancle-btn:hover {
+            background-color: #f44;
         }
 
         /* Responsive Design */
@@ -158,6 +174,8 @@
             <textarea id="comment" name="comment" rows="4" placeholder="Enter any comments"></textarea>
             
             <button type="submit">Submit Payment</button>
+            <button><a href="viewStudent.php" class="cancle-btn">Cancel</a></button>
+
         </form>
     </div>
 </body>

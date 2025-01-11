@@ -57,7 +57,10 @@
     margin-top: 20px;
 }
 
-
+.box:hover p {
+    color: royalblue;
+    font-weight: 600;
+}
 
 /*---------------------- Responsive Design ----------------------*/
 

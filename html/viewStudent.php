@@ -72,7 +72,23 @@ session_start();
 
             <main class="main-content">
 
-                <a href="student.php"><button class="go-back">Go Back</button></a>
+            <div class="back-button" style="padding: 20px;">
+                        <button onclick="goBack()" style="
+                                padding: 10px 20px;
+                                background-color: #f8f8f8;
+                                border: 1px solid #ddd;
+                                border-radius: 4px;
+                                cursor: pointer;
+                                font-size: 14px;
+                            ">
+                            ← Back
+                        </button>
+                    </div>
+                    <script>
+                        function goBack() {
+                            window.history.back();
+                        }
+                    </script>
 
                 <div class="navigation">
                     <div class="search">

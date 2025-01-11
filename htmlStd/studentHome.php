@@ -48,6 +48,11 @@ $conn->close();
             color: red;
             text-decoration: underline;
         }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
     </style>
     <title>Dashboard</title>
 
@@ -110,38 +115,67 @@ $conn->close();
                 $conn->close();
                 ?>
 
+                <?php
+                include '../api/connection.php';
+                $totalPaidAmount = 0;
+
+                $sql = "SELECT SUM(paid_amount) AS total_paid_amount FROM other_fee_details WHERE student_id = ?";
+
+                try {
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("i", $student_id_main);
+
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    if ($result && $row = $result->fetch_assoc()) {
+                        $totalPaidAmount = $row['total_paid_amount'] ?? 0; // Use null coalescing operator to avoid null
+                    }
+                    $result->free();
+                } catch (Exception $e) {
+                    echo "Error: " . $e->getMessage();
+                }
+
+                $stmt->close();
+                $conn->close();
+                ?>
+
+
+
                 <div class="dtl-section">
-                    <div class="card total">
-                        <a href="#" style="color: #333; text-decoration: none;">
+                    <a href="#" class="card total">
+                        <div class="photo">
+                            <img src="../images/totalfee.jpg" alt="Total Fee">
+                        </div>
+                        <h3>Total Fee</h3>
+                        <strong><?php echo $total_fee; ?></strong>
+                    </a>
+                    <a href="details.php" class="card paid">
+                        <div class="photo">
+                            <img src="../images/paid.jpg" alt="Paid Fee">
+                        </div>
+                        <h3>Paid Fee</h3>
+                        <strong><?php echo $paid_fee; ?></strong>
+                    </a>
+                    <a href="#" class="card due">
+                        <div class="photo">
+                            <img src="../images/paymentDue.jpg" alt="Due Fee">
+                        </div>
+                        <h3>Due Fee</h3>
+                        <strong><?php echo $due_fee; ?></strong>
+                    </a>
 
-                            <div class="photo">
-                                <img src="../images/totalfee.jpg" alt="Total Fee">
-                            </div>
-                            <h3>Total Fee</h3>
-                            <strong><?php echo $total_fee; ?></strong>
-                        </a>
-                    </div>
-                    <div class="card paid">
-                        <a href="details.php" style="color: #333; text-decoration: none;">
-
-                            <div class="photo">
-                                <img src="../images/paid.jpg" alt="Paid Fee">
-                            </div>
-                            <h3>Paid Fee</h3>
-                            <strong><?php echo $paid_fee; ?></strong>
-                        </a>
-                    </div>
-                    <div class="card due">
-                        <a href="#" style="color: #333; text-decoration: none;">
-
-                            <div class="photo">
-                                <img src="../images/paymentDue.jpg" alt="Due Fee">
-                            </div>
-                            <h3>Due Fee</h3>
-                            <strong><?php echo $due_fee; ?></strong>
-                        </a>
-                    </div>
+                    <a href="details.php" class="card other">
+                        <div class="photo">
+                            <img src="../images/otherfee.jpg" alt="Due Fee">
+                        </div>
+                        <h3>Other Paid Fee</h3>
+                        <strong><?php echo $totalPaidAmount; ?></strong>
+                    </a>
                 </div>
+
+
+
+
 
 
 

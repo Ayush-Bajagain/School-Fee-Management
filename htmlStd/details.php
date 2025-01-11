@@ -17,19 +17,18 @@ session_start();
 
 <body>
 
-<?php
-        $user_profile = $_SESSION["email"];
-        $role = $_SESSION["role"];
+    <?php
+    $user_profile = $_SESSION["email"];
+    $role = $_SESSION["role"];
 
-        if ($user_profile == true && $role == "student") {
+    if ($user_profile == true && $role == "student") {
+    } else {
+        header("location:../index.php");
+    }
 
-        }else{
-            header("location:../index.php");
-        }
-    
     ?>
     <div class="container">
-    <header class="header">
+        <header class="header">
             <div class="logo">
                 <img src="../images/kcmit.jpg" alt="School Logo">
             </div>
@@ -48,8 +47,8 @@ session_start();
 
                 <nav class="menu">
                     <ul id="nav-menu">
-                        <li><a href="studentHome.php" >Home</a></li>
-                        <li><a href="notice.php" >Fee Notice</a></li>
+                        <li><a href="studentHome.php">Home</a></li>
+                        <li><a href="notice.php">Fee Notice</a></li>
                         <li><a href="#" class="active">History</a></li>
                         <li><a href="payment.php">Payment</a></li>
                         <li id="logout-bnt"><a href="../api/logout.php" style=" display: block;color: white;text-decoration: none;background-color: #ff4d4d;padding: 8px 30px;border-radius: 5px;">Logout</a></li>
@@ -60,22 +59,39 @@ session_start();
             <main class="main-content">
 
                 <div class="nav">
+                    <div class="back-button" style="padding: 20px;">
+                        <button onclick="goBack()" style="
+                                padding: 10px 20px;
+                                background-color: #f8f8f8;
+                                border: 1px solid #ddd;
+                                border-radius: 4px;
+                                cursor: pointer;
+                                font-size: 14px;
+                            ">
+                            ← Back
+                        </button>
+                    </div>
+                    <script>
+                        function goBack() {
+                            window.history.back();
+                        }
+                    </script>
                     <h2>History Of Your Transaction</h2>
                 </div>
 
 
                 <?php
-                    include("../api/connection.php");
+                include("../api/connection.php");
 
-                    $sql = "SELECT * FROM payment_history where email = '$user_profile'";
-                    $result = $conn->query($sql);
+                $sql = "SELECT * FROM payment_history where email = '$user_profile'";
+                $result = $conn->query($sql);
 
-                    if (!$result) {
-                        die("Query failed: " . $conn->error);
-                    }
+                if (!$result) {
+                    die("Query failed: " . $conn->error);
+                }
                 ?>
 
-                <table border="1" cellspacing="0" cellpadding="10">
+                <table>
                     <thead>
                         <tr>
                             <th>Transaction ID</th>
@@ -145,18 +161,18 @@ session_start();
     <script src="../js/navigationRespon.js"></script>
 
     <script>
-function showPopup(imageSrc) {
-    const popup = document.getElementById('photoPopup');
-    const popupImage = document.getElementById('popupImage');
-    popupImage.src = imageSrc;
-    popup.style.display = 'flex';
-}
+        function showPopup(imageSrc) {
+            const popup = document.getElementById('photoPopup');
+            const popupImage = document.getElementById('popupImage');
+            popupImage.src = imageSrc;
+            popup.style.display = 'flex';
+        }
 
-function hidePopup() {
-    const popup = document.getElementById('photoPopup');
-    popup.style.display = 'none';
-}
-</script>
+        function hidePopup() {
+            const popup = document.getElementById('photoPopup');
+            popup.style.display = 'none';
+        }
+    </script>
 </body>
 
 </html>
