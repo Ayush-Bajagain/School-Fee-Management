@@ -176,6 +176,13 @@ session_start();
                             </tr>
                         </thead>
                         <tbody>
+                            <style>
+                                .photo-column {
+                                    width: 100px;
+                                    height: 100px;
+                                    overflow: hidden;
+                                }
+                            </style>
                             <?php
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
@@ -186,7 +193,7 @@ session_start();
                                     echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                                     echo "<td>" . htmlspecialchars($row['batch']) . "</td>";
                                     echo "<td>" . htmlspecialchars($row['program']) . "</td>";
-                                    echo "<td><img src='" . $photo_path . "' onclick='openModal(\"" . $photo_path . "\")' alt='Student Photo'></td>";
+                                    echo "<td><img src='" . $photo_path . "' onclick='openModal(\"" . $photo_path . "\")' alt='Student Photo' class='photo-column'></td>";
                                     echo "<td>" . htmlspecialchars($row['remark']) . "</td>";
                                     echo "<td>" . htmlspecialchars($row['payment_purpose']) . "</td>";
                                     echo "<td>" . htmlspecialchars($row['amount']) . "</td>";
